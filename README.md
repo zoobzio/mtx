@@ -1,13 +1,13 @@
-# samoa
+# mtx
 
-[![CI Status](https://github.com/zoobzio/samoa/workflows/CI/badge.svg)](https://github.com/zoobzio/samoa/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/zoobzio/samoa/graph/badge.svg?branch=main)](https://codecov.io/gh/zoobzio/samoa)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zoobzio/samoa)](https://goreportcard.com/report/github.com/zoobzio/samoa)
-[![CodeQL](https://github.com/zoobzio/samoa/workflows/CodeQL/badge.svg)](https://github.com/zoobzio/samoa/security/code-scanning)
-[![Go Reference](https://pkg.go.dev/badge/github.com/zoobzio/samoa.svg)](https://pkg.go.dev/github.com/zoobzio/samoa)
-[![License](https://img.shields.io/github/license/zoobzio/samoa)](LICENSE)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/zoobzio/samoa)](go.mod)
-[![Release](https://img.shields.io/github/v/release/zoobzio/samoa)](https://github.com/zoobzio/samoa/releases)
+[![CI Status](https://github.com/zoobzio/mtx/workflows/CI/badge.svg)](https://github.com/zoobzio/mtx/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/zoobzio/mtx/graph/badge.svg?branch=main)](https://codecov.io/gh/zoobzio/mtx)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zoobzio/mtx)](https://goreportcard.com/report/github.com/zoobzio/mtx)
+[![CodeQL](https://github.com/zoobzio/mtx/workflows/CodeQL/badge.svg)](https://github.com/zoobzio/mtx/security/code-scanning)
+[![Go Reference](https://pkg.go.dev/badge/github.com/zoobzio/mtx.svg)](https://pkg.go.dev/github.com/zoobzio/mtx)
+[![License](https://img.shields.io/github/license/zoobzio/mtx)](LICENSE)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/zoobzio/mtx)](go.mod)
+[![Release](https://img.shields.io/github/v/release/zoobzio/mtx)](https://github.com/zoobzio/mtx/releases)
 
 Template repository for standing up Go library infrastructure matching the zoobzio ecosystem. Clone it, rename it, start building.
 
@@ -39,7 +39,7 @@ your-new-package/
 This is a GitHub template repository. Click **Use this template** on GitHub, or:
 
 ```bash
-gh repo create your-package --template zoobzio/samoa --clone
+gh repo create your-package --template zoobzio/mtx --clone
 cd your-package
 ```
 
@@ -51,7 +51,7 @@ After creating your repository from the template:
 
 ```bash
 # Update module path
-sed -i 's/samoa/your-package/g' go.mod Makefile .goreleaser.yml
+sed -i 's/mtx/your-package/g' go.mod Makefile .goreleaser.yml
 
 # Install development tools
 make install-tools
@@ -73,7 +73,7 @@ make check
 | Security scanning | gosec + CodeQL | `.github/workflows/codeql.yml` |
 | Benchmarks | Structured benchmark directory | `testing/benchmarks/` |
 
-## Why Samoa?
+## Why mtx?
 
 - **Immediate CI**: Push and your workflows run—no setup required
 - **Consistent tooling**: Every zoobzio package uses the same linter config, coverage targets, and release process
@@ -82,7 +82,7 @@ make check
 
 ## The Zoobzio Ecosystem
 
-All zoobzio Go libraries use samoa as their foundation. When standards evolve, updates propagate from here.
+All zoobzio Go libraries use mtx as their foundation. When standards evolve, updates propagate from here.
 
 ## Documentation
 

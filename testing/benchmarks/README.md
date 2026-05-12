@@ -1,6 +1,6 @@
 # Benchmarks
 
-This directory contains performance benchmarks for samoa.
+This directory contains performance benchmarks for mtx.
 
 ## Running
 

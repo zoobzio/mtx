@@ -120,30 +120,19 @@ func TestClientErrorResponse(t *testing.T) {
 
 func TestTokenFromEnv(t *testing.T) {
 	t.Setenv("MTX_TOKEN", "tok_env")
-	t.Setenv("JACK_MSG_TOKEN", "")
 	token, err := TokenFromEnv()
 	mtesting.AssertNoError(t, err)
 	mtesting.AssertEqual(t, token, "tok_env")
 }
 
-func TestTokenFromEnvFallback(t *testing.T) {
-	t.Setenv("MTX_TOKEN", "")
-	t.Setenv("JACK_MSG_TOKEN", "tok_jack")
-	token, err := TokenFromEnv()
-	mtesting.AssertNoError(t, err)
-	mtesting.AssertEqual(t, token, "tok_jack")
-}
-
 func TestTokenFromEnvMissing(t *testing.T) {
 	t.Setenv("MTX_TOKEN", "")
-	t.Setenv("JACK_MSG_TOKEN", "")
 	_, err := TokenFromEnv()
 	mtesting.AssertError(t, err)
 }
 
 func TestTokenFromEnvFile(t *testing.T) {
 	t.Setenv("MTX_TOKEN", "")
-	t.Setenv("JACK_MSG_TOKEN", "")
 	dir := t.TempDir()
 	mtxDir := filepath.Join(dir, ".mtx")
 	_ = os.MkdirAll(mtxDir, 0o750)
@@ -154,45 +143,21 @@ func TestTokenFromEnvFile(t *testing.T) {
 	mtesting.AssertEqual(t, token, "tok_file")
 }
 
-func TestTokenFromEnvFileFallback(t *testing.T) {
-	t.Setenv("MTX_TOKEN", "")
-	t.Setenv("JACK_MSG_TOKEN", "")
-	dir := t.TempDir()
-	jackDir := filepath.Join(dir, ".jack")
-	_ = os.MkdirAll(jackDir, 0o750)
-	_ = os.WriteFile(filepath.Join(jackDir, "env"), []byte("JACK_MSG_TOKEN=tok_file\nJACK_TEAM=blue\n"), 0o600)
-	t.Chdir(dir)
-	token, err := TokenFromEnv()
-	mtesting.AssertNoError(t, err)
-	mtesting.AssertEqual(t, token, "tok_file")
-}
-
 func TestTeamFromEnv(t *testing.T) {
 	t.Setenv("MTX_TEAM", "blue")
-	t.Setenv("JACK_TEAM", "")
 	team, err := TeamFromEnv()
 	mtesting.AssertNoError(t, err)
 	mtesting.AssertEqual(t, team, "blue")
 }
 
-func TestTeamFromEnvFallback(t *testing.T) {
-	t.Setenv("MTX_TEAM", "")
-	t.Setenv("JACK_TEAM", "red")
-	team, err := TeamFromEnv()
-	mtesting.AssertNoError(t, err)
-	mtesting.AssertEqual(t, team, "red")
-}
-
 func TestTeamFromEnvMissing(t *testing.T) {
 	t.Setenv("MTX_TEAM", "")
-	t.Setenv("JACK_TEAM", "")
 	_, err := TeamFromEnv()
 	mtesting.AssertError(t, err)
 }
 
 func TestTeamFromEnvFile(t *testing.T) {
 	t.Setenv("MTX_TEAM", "")
-	t.Setenv("JACK_TEAM", "")
 	dir := t.TempDir()
 	mtxDir := filepath.Join(dir, ".mtx")
 	_ = os.MkdirAll(mtxDir, 0o750)

@@ -1,6 +1,6 @@
-# Contributing to samoa
+# Contributing to mtx
 
-Thank you for considering contributing to samoa.
+Thank you for considering contributing to mtx.
 
 ## Development Setup
 

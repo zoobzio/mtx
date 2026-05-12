@@ -671,43 +671,29 @@ func (c *Client) doCtx(ctx context.Context, method, path string, body interface{
 }
 
 // TokenFromEnv reads the Matrix access token. It checks MTX_TOKEN first,
-// then falls back to JACK_MSG_TOKEN for transition compatibility, then
-// walks up from CWD looking for .mtx/env or .jack/env files.
+// then walks up from CWD looking for .mtx/env files.
 func TokenFromEnv() (string, error) {
 	if token := os.Getenv("MTX_TOKEN"); token != "" {
-		return token, nil
-	}
-	if token := os.Getenv("JACK_MSG_TOKEN"); token != "" {
 		return token, nil
 	}
 	if token := envFromFile("MTX_TOKEN"); token != "" {
 		return token, nil
 	}
-	if token := envFromFile("JACK_MSG_TOKEN"); token != "" {
-		return token, nil
-	}
 	return "", fmt.Errorf("MTX_TOKEN not set and no .mtx/env found")
 }
 
-// TeamFromEnv reads the team name. Checks MTX_TEAM first, then falls back
-// to JACK_TEAM for transition compatibility.
+// TeamFromEnv reads the team name from MTX_TEAM or .mtx/env files.
 func TeamFromEnv() (string, error) {
 	if team := os.Getenv("MTX_TEAM"); team != "" {
-		return team, nil
-	}
-	if team := os.Getenv("JACK_TEAM"); team != "" {
 		return team, nil
 	}
 	if team := envFromFile("MTX_TEAM"); team != "" {
 		return team, nil
 	}
-	if team := envFromFile("JACK_TEAM"); team != "" {
-		return team, nil
-	}
 	return "", fmt.Errorf("MTX_TEAM not set and no .mtx/env found")
 }
 
-// envFromFile walks up from CWD looking for .mtx/env or .jack/env and reads
+// envFromFile walks up from CWD looking for .mtx/env and reads
 // a KEY=VALUE entry matching the given key.
 func envFromFile(key string) string {
 	dir, err := os.Getwd()
@@ -715,14 +701,12 @@ func envFromFile(key string) string {
 		return ""
 	}
 	for {
-		for _, envDir := range []string{".mtx", ".jack"} {
-			path := filepath.Join(dir, envDir, "env")
-			data, err := os.ReadFile(filepath.Clean(path))
-			if err == nil {
-				for _, line := range strings.Split(string(data), "\n") {
-					if k, v, ok := strings.Cut(line, "="); ok && k == key {
-						return v
-					}
+		path := filepath.Join(dir, ".mtx", "env")
+		data, err := os.ReadFile(filepath.Clean(path))
+		if err == nil {
+			for _, line := range strings.Split(string(data), "\n") {
+				if k, v, ok := strings.Cut(line, "="); ok && k == key {
+					return v
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 # Integration Tests
 
-This directory contains integration tests that verify samoa works correctly with external dependencies.
+This directory contains integration tests that verify mtx works correctly with external dependencies.
 
 ## Running
 

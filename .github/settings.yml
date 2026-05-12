@@ -1,7 +1,7 @@
 repository:
-  name: samoa
-  description: Template repository for zoobzio Go packages
-  homepage: https://github.com/zoobzio/samoa
+  name: mtx
+  description: Standalone Matrix messaging CLI for agentic coordination
+  homepage: https://github.com/zoobzio/mtx
   has_wiki: true
   has_downloads: true
   default_branch: main

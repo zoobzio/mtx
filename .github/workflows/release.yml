@@ -69,5 +69,5 @@ jobs:
     - name: Verify module is fetchable
       run: |
         sleep 60  # Wait for proxy to update
-        go install github.com/zoobzio/samoa@${{ github.ref_name }}
+        go install github.com/zoobzio/mtx@${{ github.ref_name }}
       continue-on-error: true

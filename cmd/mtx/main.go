@@ -1,3 +1,4 @@
+// Package main provides the mtx CLI entrypoint.
 package main
 
 import (

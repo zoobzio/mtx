@@ -72,6 +72,8 @@ func parseInvites(invites map[string]SyncInvitedRoom) []inviteInfo {
 // are detected promptly even if the server ignores early returns.
 const pollInterval = 5
 
+type syncFunc func(ctx context.Context, since string, timeout int, roomID string) (*SyncResponse, error)
+
 func runWatch(timeout int, follow, jsonOut bool, sync syncFunc, getInfo RoomInfoGetter) error {
 	ctx := context.Background()
 	if !follow && timeout > 0 {

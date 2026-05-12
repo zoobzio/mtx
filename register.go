@@ -7,6 +7,7 @@ import (
 )
 
 func init() {
+	registerCmd.Flags().String("token", "", "registration token")
 	rootCmd.AddCommand(registerCmd)
 }
 
@@ -14,9 +15,10 @@ var registerCmd = &cobra.Command{
 	Use:   "register <username> <password>",
 	Short: "Register a Matrix user and print access token",
 	Args:  cobra.ExactArgs(2),
-	RunE: func(_ *cobra.Command, args []string) error {
+	RunE: func(cmd *cobra.Command, args []string) error {
+		token, _ := cmd.Flags().GetString("token")
 		client := NewClient(Homeserver, "")
-		return runRegister(args[0], args[1], RegistrationToken, client.Register)
+		return runRegister(args[0], args[1], token, client.Register)
 	},
 }
 

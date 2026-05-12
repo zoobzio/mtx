@@ -136,36 +136,11 @@ func TestTokenFromEnvFile(t *testing.T) {
 	dir := t.TempDir()
 	mtxDir := filepath.Join(dir, ".mtx")
 	_ = os.MkdirAll(mtxDir, 0o750)
-	_ = os.WriteFile(filepath.Join(mtxDir, "env"), []byte("MTX_TOKEN=tok_file\nMTX_TEAM=blue\n"), 0o600)
+	_ = os.WriteFile(filepath.Join(mtxDir, "env"), []byte("MTX_TOKEN=tok_file\n"), 0o600)
 	t.Chdir(dir)
 	token, err := TokenFromEnv()
 	mtesting.AssertNoError(t, err)
 	mtesting.AssertEqual(t, token, "tok_file")
-}
-
-func TestTeamFromEnv(t *testing.T) {
-	t.Setenv("MTX_TEAM", "blue")
-	team, err := TeamFromEnv()
-	mtesting.AssertNoError(t, err)
-	mtesting.AssertEqual(t, team, "blue")
-}
-
-func TestTeamFromEnvMissing(t *testing.T) {
-	t.Setenv("MTX_TEAM", "")
-	_, err := TeamFromEnv()
-	mtesting.AssertError(t, err)
-}
-
-func TestTeamFromEnvFile(t *testing.T) {
-	t.Setenv("MTX_TEAM", "")
-	dir := t.TempDir()
-	mtxDir := filepath.Join(dir, ".mtx")
-	_ = os.MkdirAll(mtxDir, 0o750)
-	_ = os.WriteFile(filepath.Join(mtxDir, "env"), []byte("MTX_TEAM=red\nMTX_TOKEN=tok\n"), 0o600)
-	t.Chdir(dir)
-	team, err := TeamFromEnv()
-	mtesting.AssertNoError(t, err)
-	mtesting.AssertEqual(t, team, "red")
 }
 
 func TestServerName(t *testing.T) {

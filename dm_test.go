@@ -45,7 +45,7 @@ func TestRunDMSendCreatesRoom(t *testing.T) {
 		return map[string][]string{}, nil
 	}
 	var directsSet bool
-	setDirect := func(_ string, rooms map[string][]string) error {
+	setDirect := func(_ string, _ map[string][]string) error {
 		directsSet = true
 		return nil
 	}

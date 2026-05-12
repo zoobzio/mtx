@@ -25,16 +25,12 @@ const unknownPlaceholder = "unknown"
 
 // Package-level config set via PersistentPreRunE from the loaded Config.
 var (
-	Homeserver        string
-	RegistrationToken string
-	DataDir           string
+	Homeserver string
 )
 
 // Config holds mtx configuration.
 type Config struct {
-	Homeserver        string `yaml:"homeserver"`
-	RegistrationToken string `yaml:"registration_token"`
-	DataDir           string `yaml:"data_dir"`
+	Homeserver string `yaml:"homeserver"`
 }
 
 // configDir returns the directory to load config from.
@@ -81,12 +77,6 @@ var rootCmd = &cobra.Command{
 		}
 		if cfg.Homeserver != "" {
 			Homeserver = cfg.Homeserver
-		}
-		if cfg.RegistrationToken != "" {
-			RegistrationToken = cfg.RegistrationToken
-		}
-		if cfg.DataDir != "" {
-			DataDir = cfg.DataDir
 		}
 		return nil
 	},
@@ -204,15 +194,6 @@ type RoomJoiner func(roomIDOrAlias string) (string, error)
 
 // RoomLeaver leaves a room.
 type RoomLeaver func(roomID string) error
-
-// ProfileChecker checks if a user profile exists.
-type ProfileChecker func(userID string) error
-
-// RoomAliasCreator registers a room alias.
-type RoomAliasCreator func(alias, roomID string) error
-
-// PresenceGetter retrieves user presence status.
-type PresenceGetter func(userID string) (*PresenceResponse, error)
 
 // EventContextGetter returns a pagination token after a given event.
 type EventContextGetter func(roomID, eventID string) (string, error)
@@ -680,17 +661,6 @@ func TokenFromEnv() (string, error) {
 		return token, nil
 	}
 	return "", fmt.Errorf("MTX_TOKEN not set and no .mtx/env found")
-}
-
-// TeamFromEnv reads the team name from MTX_TEAM or .mtx/env files.
-func TeamFromEnv() (string, error) {
-	if team := os.Getenv("MTX_TEAM"); team != "" {
-		return team, nil
-	}
-	if team := envFromFile("MTX_TEAM"); team != "" {
-		return team, nil
-	}
-	return "", fmt.Errorf("MTX_TEAM not set and no .mtx/env found")
 }
 
 // envFromFile walks up from CWD looking for .mtx/env and reads
